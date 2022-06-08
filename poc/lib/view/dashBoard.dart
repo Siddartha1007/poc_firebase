@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'package:poc/models/stuClass.dart';
+import 'package:poc/services/dBase.dart';
+import 'package:poc/view/add_new_view.dart';
+import 'package:poc/view/details_screen.dart';
+import 'package:poc/view_models/dashBoard_viewModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stacked/stacked.dart';
+
+// import 'dart:js';
+
+class DashBoard extends StatefulWidget {
+  // final String usid;
+  const DashBoard({Key? key,}) : super(key: key);
+
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
+
+  @override
+  Widget build(BuildContext context) {
+    
+    Future<SharedPreferences> _pref = SharedPreferences.getInstance();
+
+    setState(() {
+      DashBoardViewModel().refresh();
+    });
+
+    return ViewModelBuilder<DashBoardViewModel>.reactive(
+      viewModelBuilder: () => DashBoardViewModel(),
+      onModelReady: (viewModel) => viewModel.initialise(),
+      builder: (context, model, child) => Scaffold(
+        appBar: AppBar(title: Text("Dash Board")),
+      body: Column(
+        children:[
+            SizedBox(height: 20),
+            Expanded(
+              child: Container(
+                child: model.stuList.isEmpty
+                    ? Container()
+                    : ListView.builder(
+                      itemCount: model.stuList.length,
+                      itemBuilder: (ctx, index) {
+                        if (index == model.stuList.length) return Container();
+                        return ListTile(
+                          title: Text(model.stuList[index].name ?? ''),
+                          trailing: IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () => model.delete(model.stuList[index].id),
+                          ),
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailsScreen(
+                                  model.stuList[index]
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }),
+              ),
+            )
+        ]
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blueAccent,
+        child: const Icon(Icons.add),
+        onPressed: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const AddNewView()),
+          );
+          model.refresh();
+        },
+      )
+
+      ),
+      // onModelReady:(m) => m.refresh()
+    );
+  }
+}

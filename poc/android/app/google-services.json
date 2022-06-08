@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "734507777513",
+    "project_id": "pocfirebase-4f52a",
+    "storage_bucket": "pocfirebase-4f52a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734507777513:android:68d08cfc7ab202bbc9df78",
+        "android_client_info": {
+          "package_name": "com.example.poc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734507777513-npbr0d39inguosp8frjknkauvpt6i1d9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsWBgRn2sjNF-IVafQNpxRUE3wu5SGl-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734507777513-npbr0d39inguosp8frjknkauvpt6i1d9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "734507777513-t0vr2d3shk6cgntap6f5p909v31vamrh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.poc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
